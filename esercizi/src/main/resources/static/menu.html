@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - Pizzeria Autunnale</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script src="js/addPizza.js" defer></script>
+  <script src="js/removePizza.js" defer></script>
+</head>
+<body>
+  <header class="bg-secondary text-white text-center py-3">
+    <h1>Menu delle Pizze</h1>
+    <p>Visualizza qui il nostro menù.. Se ti va aggiungi o rimuovi una pizza!</p>
+  </header>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a id="home" class="navbar-brand" href="index.html">Home</a>
+    <a id="contatti" class="nav-link" href="contatti.html">Contatti</a>
+    <a id="menu" class="nav-link" href="menu.html">Menu</a>
+  </nav>
+
+  <main class="container my-4">
+    <section>
+      <h2>Lista Pizze Disponibili</h2>
+      <table class="table table-striped" id="pizza-table">
+        <thead>
+          <tr>
+            <th>Nome Pizza</th>
+            <th>Ingredienti</th>
+            <th>Prezzo</th>
+            <th>Azione</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Margherita</td>
+            <td>Pomodoro, Mozzarella, Basilico</td>
+            <td>€6.00</td>
+            <td><button class="btn btn-danger" onclick="removePizza(this)">Elimina</button></td>
+          </tr>
+          <tr>
+            <td>Quattro Stagioni</td>
+            <td>Pomodoro, Mozzarella, Prosciutto cotto, Olive nere, Carciofini, Funghi.</td>
+            <td>€8.00</td>
+            <td><button class="btn btn-danger" onclick="removePizza(this)">Elimina</button></td>
+          </tr>
+          <tr>
+            <td>Funghi</td>
+            <td>Pomodoro, Mozzarella, Funghi porcini</td>
+            <td>€7.50</td>
+            <td><button class="btn btn-danger" onclick="removePizza(this)">Elimina</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Aggiungi una Pizza</h3>
+      <form id="addPizzaForm">
+        <div class="form-group">
+          <input type="text" class="form-control" id="pizzaName" placeholder="Nome della Pizza" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="pizzaIngredients" placeholder="Ingredienti" required>
+        </div>
+        <div id="last-form-row" class="d-flex align-items-center">
+            <div class="form-group">
+                <input type="text" class="form-control" id="pizzaPrice" placeholder="Prezzo" required>
+            </div>
+            <button id="add-button" type="button" class="btn btn-primary" onclick="addPizza()">Aggiungi Pizza</button>
+        </div>
+        </form>
+    </section>
+  </main>
+
+  <footer class="text-center text-white bg-secondary py-3">
+    <p>Pizzeria Autunnale &copy; 2024</p>
+  </footer>
+</body>
+</html>

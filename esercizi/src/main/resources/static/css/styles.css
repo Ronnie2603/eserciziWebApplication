@@ -1,0 +1,180 @@
+body {
+    font-family: 'Raleway', sans-serif !important;
+    background-color: rgb(243, 242, 222) !important;
+    color: #3a2924 !important;
+}
+
+.bg-secondary{
+    background-color: #d4681a !important;
+}
+
+.row{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.row p{
+    background-color: #d4681a;
+    border-radius: 5px;
+    padding: 0px 3px;
+}
+
+.col-md-4 {
+    margin: 0px 5px;
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;   
+    background-color: #f4c98542 !important;
+    border-radius: 5px;
+    flex:1;
+}
+
+.image-container {
+    width: 250px;           
+    height: 200px;          
+    overflow: hidden; 
+    display: flex;
+}
+img {
+    width: 100%;           
+    height: auto;          
+    object-fit: cover;     
+    justify-content: center;
+}
+
+header {
+    color: #3a2924 !important;
+    padding: 20px;
+    text-align: center;
+}
+
+header .bg-secondary{
+    background-color: #d4681a !important;
+}
+  
+.navbar {
+    background-color: #5a2d1e !important;
+}
+.navbar a {
+    color: rgb(243, 242, 222) !important;
+    margin: 0;
+}
+.navbar a:hover {
+    color: #d4681a !important;
+}
+.navbar #home{
+    background-color: #a63d2e;
+    border-radius: 5px;
+    padding: 5px;
+}
+  
+main {
+    padding: 20px;
+}  
+
+h2 {
+    color: #a63d2e;
+    border-bottom: 2px solid #d4681a;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    margin-bottom: 15px;
+}
+  
+h3{
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    background-color: #f3f1ed;
+}  
+table thead {
+    background-color: #5a2d1e;
+    color: #f3f1ed;
+}  
+table tbody tr:nth-child(even) {
+    background-color: #d4681a;
+    color: #ffffff;
+} 
+table tbody tr:nth-child(odd) {
+    background-color: #a63d2e;
+    color: #0b0b0b;
+}
+table tbody tr:nth-child(even) button, table tbody tr:nth-child(odd) button{
+    background-color: #d43a0a !important;
+}
+  
+button {
+    background-color: #d4681a !important;
+    border: none !important;
+    color: #f3f1ed !important;
+    padding: 8px 12px;
+    margin: 0 !important;
+    cursor: pointer;
+}
+  
+button:hover {
+    background-color: #a63d2e;
+}
+  
+.card {
+    background-color: #5a2d1e;
+    color: #f3f1ed;
+    border: none;
+}
+.card-title {
+    color: #d4681a;
+}
+
+#addPizzaForm{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group{
+    margin: 0px;
+}
+
+#last-form-row{
+    display: flex;
+    justify-content:space-between;
+    gap: 10px;
+}
+#last-form-row .form-group{
+    flex: 1;
+}
+
+#add-button {
+    justify-content: end;
+    margin: 0px;
+}
+
+#contattaci-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+#send-button{
+    margin: 0px;
+    margin-top: 10px !important;
+}
+
+label{
+    margin-bottom: 2px;
+    margin-top: 5px;
+}
+
+footer .bg-secondary{
+    background-color: #3a2924 !important;
+    color: #f3f1ed;
+    padding: 15px;
+    text-align: center;
+}
+  
