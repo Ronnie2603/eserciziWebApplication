@@ -67,9 +67,9 @@
         </div>
         <div id="last-form-row" class="d-flex align-items-center">
             <div class="form-group">
-                <input type="text" class="form-control" id="pizzaPrice" placeholder="Prezzo" required>
+                <input type="number" class="form-control" id="pizzaPrice" placeholder="Prezzo" min="0" step=".01" required>
             </div>
-            <button id="add-button" type="button" class="btn btn-primary" onclick="addPizza()">Aggiungi Pizza</button>
+            <button id="add-button" type="submit" class="btn btn-primary">Aggiungi Pizza</button>
         </div>
         </form>
     </section>
