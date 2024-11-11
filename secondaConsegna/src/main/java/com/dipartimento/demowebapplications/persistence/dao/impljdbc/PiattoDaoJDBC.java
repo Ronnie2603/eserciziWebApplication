@@ -1,10 +1,8 @@
 package com.dipartimento.demowebapplications.persistence.dao.impljdbc;
 
 import com.dipartimento.demowebapplications.model.Piatto;
-import com.dipartimento.demowebapplications.model.Ristorante;
 import com.dipartimento.demowebapplications.persistence.DBManager;
 import com.dipartimento.demowebapplications.persistence.dao.PiattoDao;
-import com.dipartimento.demowebapplications.persistence.dao.RistoranteDao;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -49,7 +47,8 @@ public class PiattoDaoJDBC implements PiattoDao {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                return new Piatto(resultSet.getString("nome"), resultSet.getString("ingredienti"));
+                PiattoProxy proxy = new PiattoProxy();
+                return new Piatto(resultSet.getString("nome"), resultSet.getString("ingredienti"), proxy.getRistoranti());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,9 +85,6 @@ ON CONFLICT (id) DO UPDATE SET txt = EXCLUDED.txt;
 
     @Override
     public List<Piatto> findAllByRistoranteName(String ristoranteNome) {
-
-
-
         List<Piatto> piatti = new ArrayList<>();
         String query = "SELECT p.nome, p.ingredienti FROM piatto p " +
                 "JOIN ristorante_piatto rp ON p.nome = rp.piatto_nome " +
@@ -101,9 +97,10 @@ ON CONFLICT (id) DO UPDATE SET txt = EXCLUDED.txt;
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
+                PiattoProxy proxy = new PiattoProxy();
                 String nome = resultSet.getString("nome");
                 String ingredienti = resultSet.getString("ingredienti");
-                piatti.add(new Piatto(nome, ingredienti));
+                piatti.add(new Piatto(nome, ingredienti,proxy.getRistoranti()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,11 +110,10 @@ ON CONFLICT (id) DO UPDATE SET txt = EXCLUDED.txt;
 
     public static void main(String[] args) {
         PiattoDao piattoDao = DBManager.getInstance().getPiattoDao();
-        List<Piatto> piatti = piattoDao.findAll();
+        List<Piatto> piatti = piattoDao.findAllByRistoranteName("Trattoria da Mario");
         for (Piatto piatto : piatti) {
             System.out.println(piatto.getNome());
             System.out.println(piatto.getIngredienti());
-
         }
     }
 }

@@ -9,4 +9,5 @@ public interface RistoranteDao {
     public Ristorante findByPrimaryKey(String nome);
     public void save(Ristorante ristorante);
     public void delete(Ristorante ristorante);
+    List<Ristorante> findAllByPiattoName(String name);
 }

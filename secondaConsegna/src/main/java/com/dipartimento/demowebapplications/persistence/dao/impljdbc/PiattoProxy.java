@@ -7,12 +7,11 @@ import com.dipartimento.demowebapplications.persistence.DBManager;
 import java.util.List;
 
 
-public class RistoranteProxy extends Ristorante {
-    public List<Piatto> getPiatti() {
-        if(this.piatti==null){
-            this.piatti = DBManager.getInstance().getPiattoDao().findAllByRistoranteName(this.nome);
+public class PiattoProxy extends Piatto {
+    public List<Ristorante> getRistoranti() {
+        if(this.ristoranti==null){
+            this.ristoranti = DBManager.getInstance().getRistoranteDao().findAllByPiattoName(this.nome);
         }
-        return piatti;
+        return ristoranti;
     }
-
 }

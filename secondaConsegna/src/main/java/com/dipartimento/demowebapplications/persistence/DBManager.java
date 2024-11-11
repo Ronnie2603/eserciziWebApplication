@@ -26,7 +26,7 @@ public class DBManager {
     public Connection getConnection(){
         if (con == null){
             try {
-                con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Unical", "postgres", "123456");
+                con = DriverManager.getConnection("jdbc:postgresql://web-application-stack_database_1:5432/esercizio2", "admin", "develop");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -55,9 +55,6 @@ public class DBManager {
         }
         return  piattoDao;
     }
-
-
-
 
     public static void main(String[] args) {
         Connection con = DBManager.getInstance().getConnection();

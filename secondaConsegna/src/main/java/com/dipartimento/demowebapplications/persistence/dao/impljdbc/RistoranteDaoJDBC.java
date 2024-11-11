@@ -13,12 +13,9 @@ import java.util.List;
 public class RistoranteDaoJDBC implements RistoranteDao {
     Connection connection = null;
 
-
     public RistoranteDaoJDBC(Connection conn){
-
         this.connection = conn;
     }
-
 
     @Override
     public List<Ristorante> findAll() {
@@ -47,8 +44,6 @@ public class RistoranteDaoJDBC implements RistoranteDao {
 
     @Override
     public Ristorante findByPrimaryKey(String nome) {
-
-
         String query = "SELECT nome, descrizione, ubicazione FROM ristorante WHERE nome = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, nome);
@@ -97,29 +92,21 @@ public class RistoranteDaoJDBC implements RistoranteDao {
                 pd.save(tempP);
                 insertJoinRistorantePiatto(connection , ristorante.getNome() , tempP.getNome());
             }
-
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void restRelationsPResentInTheJoinTable(Connection connection, String nomeRistorante) throws Exception {
-
         String query="Delete FROM ristorante_piatto WHERE ristorante_nome= ? ";
 
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, nomeRistorante);
 
-
         preparedStatement.execute();
-
     }
 
     private void insertJoinRistorantePiatto(Connection connection , String nomeRistorante, String nomePiatto) throws SQLException {
-
         String query="INSERT INTO ristorante_piatto (ristorante_nome,piatto_nome) VALUES (? , ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -127,18 +114,43 @@ public class RistoranteDaoJDBC implements RistoranteDao {
         preparedStatement.setString(2, nomePiatto);
 
         preparedStatement.execute();
-
     }
-
 
     @Override
-    public void delete(Ristorante ristorante) {
+    public void delete(Ristorante ristorante) {}
 
+    @Override
+    public List<Ristorante> findAllByPiattoName(String piattoNome) {
+        List<Ristorante> ristoranti = new ArrayList<>();
+        String query = "SELECT r.nome, r.descrizione, r.ubicazione FROM ristorante r " +
+                       "JOIN ristorante_piatto rp ON r.nome = rp.ristorante_nome " +
+                       "WHERE rp.piatto_nome = ?";
+
+        System.out.println("going to execute:"+query);
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, piattoNome);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                RistoranteProxy proxy = new RistoranteProxy();
+
+                String nome = resultSet.getString("nome");
+                String descrizione = resultSet.getString("descrizione");
+                String ubicazione = resultSet.getString("ubicazione");
+                List<Piatto> piatti = proxy.getPiatti();
+                ristoranti.add(new Ristorante(nome,descrizione,ubicazione,piatti));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ristoranti;
     }
+
 
     public static void main(String[] args) {
         RistoranteDao ristoDao = DBManager.getInstance().getRistoranteDao();
-        List<Ristorante> ristoranti = ristoDao.findAll();
+        List<Ristorante> ristoranti = ristoDao.findAllByPiattoName("Bruschetta");
         for (Ristorante ristorante : ristoranti) {
             System.out.println(ristorante.getNome());
             System.out.println(ristorante.getDescrizione());
